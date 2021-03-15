@@ -1,0 +1,12 @@
+{# configure how this looks in HTML using Jinja2 template #}
+
+{# you can put regular python referring to the 'example' variable here. #}
+<pre> {{ example.json_str() }} </pre>
+
+{# it's unlikely YOUR data will need a colored square, so you can delete everything but the pre tag to start! #}
+{% if 'html' in example.features %}
+    {# I hid this in an if-statement so it should magically disappear if you don't have that feature #}
+    <svg width="100" height="100">
+        <rect width="100" height="100" style="fill:{{example.features.html}}" />
+    </svg>
+{% endif %}

@@ -1,0 +1,35 @@
+{% extends 'base.j2' %}
+
+{% block title %}Label {{example.id}}{%endblock%}
+{% block body %}
+<div class="card">
+    <div class="card-header">Labeling <code>{{example.id}}</code> <a class="float-right btn btn-success" href="/">Next Random</a></div>
+    <div class="card-body">
+        {% include 'example.j2' %}
+        <hr />
+        Apply Label: 
+        {% for button in add_buttons %}
+        <form class="display-inline" method="POST" action="{{url_for('post_label')}}">
+            <input type="hidden" name="label" value="{{button}}" />
+            <input type="hidden" name="id" value="{{example.id}}" />
+            <input type="submit" class='btn btn-sm btn-primary' value="{{button}}">
+        </form>
+        {% endfor %}
+        <form class="display-inline" method="POST" action="{{url_for('post_label')}}">
+            <input type="hidden" name="id" value="{{example.id}}" />
+            <input type="text" name="label" placeholder="..." value="" />
+            <input type="submit" class='btn btn-sm btn-secondary' value="Other">
+        </form>
+        <hr />
+        Undo Label: 
+        {% for button in delete_buttons %}
+        <form class="display-inline" method="POST" action="{{url_for('undo_label')}}">
+            <input type="hidden" name="label" value="{{button}}" />
+            <input type="hidden" name="id" value="{{example.id}}" />
+            <input type="submit" class='btn btn-sm btn-danger' value="{{button}}">
+        </form>
+        {% endfor %}
+    </div>
+    <div class="card-footer small"><code>{{example.id}}</code> from line {{example.source_line}} of <code>{{example.source_file}}</code></div>
+</div>
+{%endblock%}
