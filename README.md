@@ -22,6 +22,8 @@ export FLASK_APP=server.py
 flask run
 ```
 
+Then navigate to <a href="http://localhost:5000">localhost:5000</a> to view it locally.
+
 ## Customizing:
 
 1. Open ``dataset.py``:
@@ -31,3 +33,7 @@ flask run
     3. Create any fields you might want on ``Example`` -- by default they're all shoved into ``features``.
 2. Change ``templates/example.j2`` to render your particular data in a user-friendly way. Each row is currently formatted as JSON.
     - You can read more about [Jinja2 templates at their documentation site](https://jinja.palletsprojects.com/en/2.11.x/).
+
+## Running it publicly (to share with a partner)
+
+TODO: heroku instructions
