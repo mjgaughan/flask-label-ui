@@ -1,6 +1,8 @@
 # flask-label-ui
 Starter code for simple multi-class labeling with flask.
 
+![Screenshot](screenshot.png)
+
 ## Get the dependencies you need:
 
 ```bash
@@ -15,7 +17,7 @@ As one line:
 export FLASK_ENV=development; export FLASK_APP=server.py; flask run
 ```
 
-As separate steps:
+As separate steps (in ``run.sh``)
 ```bash
 export FLASK_ENV=development
 export FLASK_APP=server.py
