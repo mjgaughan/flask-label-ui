@@ -1,0 +1,24 @@
+{% extends 'base.j2' %}
+
+{% block title %}Stats!{%endblock%}
+{% block body %}
+
+<table class="table table-sm table-striped table-bordered table-hover">
+<thead class='thead-dark'>
+<tr><th>Label</th><th># Users</th><th># Examples</th><th>Examples</th></tr>
+</thead>
+<tbody>
+{% for label, stats in label_stats.items() %}
+<tr><td>{{label}}</td><td>{{len(stats.users)}}</td>
+<td>{{len(stats.instances)}}</td>
+<td>
+{% for item in stats.instances %}
+<a href="{{url_for('label', id=item)}}">{{item}}</a>
+{% endfor %}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{%endblock%}

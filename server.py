@@ -1,12 +1,14 @@
-from flask import Flask, session, redirect, url_for, request, render_template
+from flask import Flask, session, redirect, url_for, request, render_template, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
 import os, random
+from typing import Set
 from datetime import datetime
-from dataclasses import dataclass
+from collections import Counter, defaultdict
+from dataclasses import dataclass, field
 
 # see dataset.py
 import dataset
@@ -109,6 +111,39 @@ def undo_label():
     db.commit()
     db.close()
     return redirect(url_for('label', id=id))
+
+@dataclass
+class LabelStats:
+    label: str
+    instances: Set[int] = field(default_factory=set)
+    users: Set[str] = field(default_factory=set)
+
+@app.route("/stats")
+def stats():
+    user = get_user()
+    if user is None:
+        return redirect_login()
+
+    label_stats = {}
+    db = Session()
+    for label in db.query(Label):
+        if label.label not in label_stats:
+            label_stats[label.label] = LabelStats(label.label)
+        stats = label_stats[label.label]
+        stats.instances.add(label.what)
+        stats.users.add(label.who)
+
+    db.close()
+    return render_template('stats.j2', label_stats=label_stats, len=len)
+
+@app.route("/labels.json")
+def download_json():
+    data = []
+    db = Session()
+    for label in db.query(Label):
+        data.append({'user': label.who, 'target': label.what, 'label': label.label, 'when': label.when})
+    return jsonify(data)
+
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
