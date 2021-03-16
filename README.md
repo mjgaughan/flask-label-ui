@@ -39,18 +39,5 @@ Then navigate to <a href="http://localhost:5000">localhost:5000</a> to view it l
 ## Running it publicly (to share with a partner)
 
 1. Get it to run locally first.
-2. Sign up for heroku (I was able to sign up without a credit card!), install their client.
-3. Create an app: ``heroku create``, push code ``git push heroku main``, and then allocate a server ``heroku ps:scale web=1``.
 
-```bash
-# once:
-heroku create # [once] create a new app
-heroku ps:scale web=1 # [once] have it run on only 1 machine
-
-# frequently:
-git push heroku main # [on update] send it the code (and start it)
-heroku open #[open in browser]
-
-#sometimes:
-heroku logs --tail # [debug] see what's happening (if errors)
-```
+TBD: switch to using heroku-postgres, since their filesystem sabotages sqlite3: https://devcenter.heroku.com/articles/sqlite3
