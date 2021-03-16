@@ -3,6 +3,12 @@ Starter code for simple multi-class labeling with flask.
 
 ![Screenshot](screenshot.png)
 
+## Getting Started:
+
+If you're just going to use this locally, you can just check out the code and modify it. If you want to back that up, I recommend creating your own repo based on this, by clicking ***'Use this template'***.
+
+***If you plan to check in your dataset, think about the legal implications of sharing your data!***. Make your repo private if your data is <100MB and you plan on checking it into git.
+
 ## Get the dependencies you need:
 
 ```bash
@@ -39,5 +45,5 @@ Then navigate to <a href="http://localhost:5000">localhost:5000</a> to view it l
 ## Running it publicly (to share with a partner)
 
 1. Get it to run locally first.
-
-TBD: switch to using heroku-postgres, since their filesystem sabotages sqlite3: https://devcenter.heroku.com/articles/sqlite3
+2. (CS451 students) Add me as a collaborator to your repo.
+3. (Everyone else) Find your credit-card and seek hosting! Digital Ocean, Vultr, Heroku (need to switch to postgres), etc.
