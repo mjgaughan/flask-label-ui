@@ -9,7 +9,7 @@ import random
 IDENTIFIER_FIELD = "id"
 
 ## What buttons should we show the user? Note: ``Other``` appears automatically.
-DEFAULT_BUTTONS = ["Nice", "Ugly", "Bad Name"]
+DEFAULT_BUTTONS = ["Certainly Mutable", "Maybe Mutable", "Unsure", "Maybe Immutable", "Certainly Immutable"]
 
 @dataclass
 class Example:
@@ -61,7 +61,7 @@ def load_jsonl_examples(path: str) -> Dict[str, Example]:
 
 
 def load_examples() -> Dict[str, Example]:
-    return load_csv_examples('html_colors.csv')
+    return load_csv_examples('id_full_shuffle_labeled.csv')
 
 if __name__ == '__main__':
     examples = load_examples()
