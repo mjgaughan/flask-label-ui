@@ -1,12 +1,31 @@
 {# configure how this looks in HTML using Jinja2 template #}
 
 {# you can put regular python referring to the 'example' variable here. #}
-<pre> {{ example.json_str() }} </pre>
-
-{# it's unlikely YOUR data will need a colored square, so you can delete everything but the pre tag to start! #}
-{% if 'html' in example.features %}
-    {# I hid this in an if-statement so it should magically disappear if you don't have that feature #}
-    <svg width="100" height="100">
-        <rect width="100" height="100" style="fill:{{example.features.html}}" />
-    </svg>
-{% endif %}
+{#<pre> {{ example.json_str()}} </pre>#}
+{#TODO: need to figure out how to identify the correct param, maybe need to loop#}
+ <h3> Instructions </h3>
+ <p> lorem ipsum etc etc</p>
+ 
+ <h3>
+    <code>
+ {{example.features.func_prototype}} 
+ </code>
+ </h3>
+ <table style="border: 1px solid black">
+    <tr style="border: 1px solid black"> <th>Parameters </th> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a0}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a1}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a2}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a3}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a4}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a5}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a6}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a7}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a8}} </td> </tr>
+    <tr style="border: 1px solid black"> <td>{{example.features.a9}} </td> </tr>
+ </table>
+ <p>Function Prototype: <code>
+ {{example.features.func_prototype}} 
+ </code></p>
+ <p> Header File: <code>{{example.features.file}}</code>; Line: {{example.features.est_line}}; <a href="https://github.com/torvalds/linux/tree/v5.16/drivers" target="_blank">Github Link</a></p>
+<h3>Body of the Function Found at TKTKTKKT which is at <a href="https://github.com/torvalds/linux/tree/v5.16/drivers" target="_blank">this link</a></h3>
