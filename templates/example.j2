@@ -3,35 +3,21 @@
 {# you can put regular python referring to the 'example' variable here. #}
 {#<pre> {{ example.json_str()}} </pre>#}
 {#TODO: need to figure out how to identify the correct param, maybe need to loop#}
- <h3> Instructions </h3>
- <p> Below you will find the function prototype as written in a header file. 
- Please label the given parameter (noted in the 'Parameters' table as the one that is neither 'u' nor 'ignore') from the buttons below.
- The body of the function can be found at the Github url linked at the bottom.
+ <h1> Instructions </h1>
+ <p> Below you will find the function header as written in a prototype or definition. 
+ Please label the given parameter with the buttons below.
+ The function prototype and definition can be found at the given Github links below, please look over both before labeling.
+ <mark>ENSURE THAT ANY SOURCE CODE YOU EXAMINE ON GITHUB IS PART OF LINUX RELEASE 5.16.</mark>
  When labeling, please label corresponding to your confidence in a given label. Mutability is defined as whether or not 
  the underlying value of the parameter is augemented in the function. Another way of thinking of it is in a read/write binary, 
- where parameters which are immutable are read-only and those that are mutable have write permissions.
+ where parameters which are immutable are read-only and those that are mutable have write permissions. If a parameter's value is changed
+ in the function, it is mutable. If its value does not change during the course of the function, it is immutable.
  </p>
- 
+ <h1> Labeling Task </h1>
+ <h3> Please label the parameter <code> {{example.features.target_param}} </code> in the function header </h3>
  <h3>
     <code>
  {{example.features.func_prototype}} 
  </code>
  </h3>
- <table style="border: 2px solid black">
-    <tr style="border: 1px solid black"> <th>Parameters </th> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a0}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a1}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a2}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a3}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a4}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a5}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a6}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a7}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a8}} </td> </tr>
-    <tr style="border: 1px solid black"> <td>{{example.features.a9}} </td> </tr>
- </table>
- <p>Function Prototype: <code>
- {{example.features.func_prototype}} 
- </code></p>
- <p> Header File: <code>{{example.features.file}}</code>; Line: {{example.features.est_line}}; <a href="https://github.com/torvalds/linux/tree/v5.16/drivers" target="_blank">Github Link</a></p>
-<h3>Body of the Function Found at TKTKTKKT which is at <a href="https://github.com/torvalds/linux/tree/v5.16/drivers" target="_blank">this link</a></h3>
+ <h3> Find the function prototype at this <a href="{{example.features.prototype_location_gh}}" target="_blank" >Github Link</a> and the function definition at this <a href="{{example.features.function_location_gh}}" target="_blank">Github Link</a></h3>
