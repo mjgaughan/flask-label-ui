@@ -148,7 +148,7 @@ def download_json():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == 'GET':
-        return render_template('login.j2', destination=request.args.get('destination', '/'))
+        return render_template('login.j2', destination=request.args.get('destination', '/'), suggested_random=random.randint(0,100_000))
     else:
         session['user'] = request.form['user']
         return redirect(request.form.get('destination', '/'))
