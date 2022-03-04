@@ -1,3 +1,4 @@
+#from pandas import Timedelta
 from flask import Flask, session, redirect, url_for, request, render_template, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
@@ -13,6 +14,8 @@ from dataclasses import dataclass, field
 # see dataset.py
 import dataset
 
+start_time = datetime.now()
+x = 5
 
 DATASET = dataset.load_examples()
 app = Flask(__name__)
@@ -32,6 +35,7 @@ class Label(Base):
     __tablename__ = 'labels'
     id = Column(Integer, primary_key=True)
     when = Column(DateTime)
+    #how_long = Column(String)
     what = Column(String)
     who = Column(String)
     label = Column(String)
@@ -73,14 +77,22 @@ def label(id: str):
     delete_buttons = []
     for button in dataset.DEFAULT_BUTTONS:
         as_lbl = process_label(button)
+        '''
         if as_lbl in labels:
             delete_buttons.append(as_lbl)
             labels.remove(as_lbl)
         else:
             add_buttons.append(as_lbl)
+        '''
+        add_buttons.append(as_lbl)
+    '''
     for lbl in labels:
         delete_buttons.append(lbl)
-    return render_template('label_one.j2', example=example, add_buttons=add_buttons, delete_buttons=delete_buttons)
+    '''
+    starts_time = datetime.now()
+    print("this is the id " + str(datetime.now()))
+    x = 4
+    return render_template('label_one.j2', example=example, add_buttons=add_buttons, delete_buttons=delete_buttons, timestamp=str(datetime.now()))
 
 @app.route("/form/label", methods=["POST"])
 def post_label():
@@ -90,11 +102,17 @@ def post_label():
     id = request.form['id']
     assert(id in DATASET)
     db = Session()
+    #timedelta = str(datetime.now() - request.form['start_time'])
+    print(request.form)
+    print(str(x + 1))
+    #print(str(user) + "took" + str(timedelta) + "to label this one"
+    #label = Label(who=user, when=datetime.now(), how_long=timedelta, what=id, label=process_label(request.form['label']))
     label = Label(who=user, when=datetime.now(), what=id, label=process_label(request.form['label']))
     db.add(label)
     db.commit()
     db.close()
-    return redirect(url_for('label', id=id))
+    next_id = random.choice(list(DATASET.keys()))
+    return redirect(url_for('label', id=next_id))
 
 @app.route("/form/undo_label", methods=["POST"])
 def undo_label():
