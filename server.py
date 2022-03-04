@@ -89,7 +89,7 @@ def label(id: str):
     for lbl in labels:
         delete_buttons.append(lbl)
     '''
-    starts_time = datetime.now()
+    start_time = datetime.now()
     print("this is the id " + str(datetime.now()))
     x = 4
     return render_template('label_one.j2', example=example, add_buttons=add_buttons, delete_buttons=delete_buttons, timestamp=str(datetime.now()))
@@ -104,6 +104,7 @@ def post_label():
     db = Session()
     #timedelta = str(datetime.now() - request.form['start_time'])
     print(request.form)
+    print(str(datetime.now() - start_time))
     print(str(x + 1))
     #print(str(user) + "took" + str(timedelta) + "to label this one"
     #label = Label(who=user, when=datetime.now(), how_long=timedelta, what=id, label=process_label(request.form['label']))
