@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 # see dataset.py
 import dataset
 
-start_time = datetime.now()
+#start_time = datetime.now()
 x = 5
 
 DATASET = dataset.load_examples()
@@ -91,8 +91,8 @@ def label(id: str):
     '''
     start_time = datetime.now()
     print("this is the id " + str(datetime.now()))
-    x = 4
-    return render_template('label_one.j2', example=example, add_buttons=add_buttons, delete_buttons=delete_buttons, timestamp=str(datetime.now()))
+    #'timestamp' below is not being represented as datetime.datetime value but instead is being shown as a simple string stripped down
+    return render_template('label_one.j2', example=example, add_buttons=add_buttons, delete_buttons=delete_buttons, timestamp=datetime.now())
 
 @app.route("/form/label", methods=["POST"])
 def post_label():
@@ -103,8 +103,8 @@ def post_label():
     assert(id in DATASET)
     db = Session()
     #timedelta = str(datetime.now() - request.form['start_time'])
-    print(request.form)
-    print(str(datetime.now() - start_time))
+    print(request.form['start_time'])
+    #print(str(datetime.now() - request.form['start_time']))
     print(str(x + 1))
     #print(str(user) + "took" + str(timedelta) + "to label this one"
     #label = Label(who=user, when=datetime.now(), how_long=timedelta, what=id, label=process_label(request.form['label']))
