@@ -13,9 +13,8 @@ from dataclasses import dataclass, field
 
 # see dataset.py
 import dataset
-
+seen_ids = []
 #start_time = datetime.now()
-x = 5
 
 DATASET = dataset.load_examples()
 app = Flask(__name__)
@@ -26,6 +25,7 @@ else:
 engine = create_engine("sqlite:///labels.db")
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
+
 
 
 class Label(Base):
@@ -58,6 +58,8 @@ def front_page():
     if user is None:
         return redirect_login()
     next_id = random.choice(list(DATASET.keys()))
+    seen_ids.append(next_id)
+    print(seen_ids)
     return redirect(url_for("label", id=next_id))
 
 
@@ -81,9 +83,11 @@ def label(id: str):
     delete_buttons = []
     for button in dataset.DEFAULT_BUTTONS:
         as_lbl = process_label(button)
-        
+        add_buttons.append(as_lbl)
+    '''
     for lbl in labels:
         delete_buttons.append(lbl)
+    '''
     now_time = datetime.now().timestamp()
     return render_template(
         "label_one.j2",
@@ -111,10 +115,18 @@ def post_label():
         what=id,
         label=process_label(request.form["label"]),
     )
+    #print(label)
     db.add(label)
     db.commit()
     db.close()
-    return redirect(url_for("label", id=id))
+    next_id = random.choice(list(DATASET.keys()))
+    while next_id in seen_ids and len(seen_ids) < 50:
+        next_id = random.choice(list(DATASET.keys()))
+    seen_ids.append(next_id)
+    print(seen_ids)
+    if len(seen_ids) == 4:
+        return redirect(url_for("stats"))
+    return redirect(url_for("label", id=next_id))
 
 
 @app.route("/form/undo_label", methods=["POST"])
