@@ -1,3 +1,4 @@
+#from pandas import Timedelta
 from flask import Flask, session, redirect, url_for, request, render_template, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Connection
@@ -13,6 +14,8 @@ from dataclasses import dataclass, field
 # see dataset.py
 import dataset
 
+#start_time = datetime.now()
+x = 5
 
 DATASET = dataset.load_examples()
 app = Flask(__name__)
@@ -29,6 +32,7 @@ class Label(Base):
     __tablename__ = "labels"
     id = Column(Integer, primary_key=True)
     when = Column(DateTime)
+    #how_long = Column(String)
     what = Column(String)
     who = Column(String)
     label = Column(String)
@@ -77,11 +81,7 @@ def label(id: str):
     delete_buttons = []
     for button in dataset.DEFAULT_BUTTONS:
         as_lbl = process_label(button)
-        if as_lbl in labels:
-            delete_buttons.append(as_lbl)
-            labels.remove(as_lbl)
-        else:
-            add_buttons.append(as_lbl)
+        
     for lbl in labels:
         delete_buttons.append(lbl)
     now_time = datetime.now().timestamp()
