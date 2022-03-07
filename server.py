@@ -81,14 +81,9 @@ def label(id: str):
     delete_buttons = []
     for button in dataset.DEFAULT_BUTTONS:
         as_lbl = process_label(button)
-        '''
-        if as_lbl in labels:
-            delete_buttons.append(as_lbl)
-            labels.remove(as_lbl)
-        else:
-            add_buttons.append(as_lbl)
-        '''
-        add_buttons.append(as_lbl)
+        
+    for lbl in labels:
+        delete_buttons.append(lbl)
     now_time = datetime.now().timestamp()
     return render_template(
         "label_one.j2",
