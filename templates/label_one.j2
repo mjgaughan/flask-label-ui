@@ -12,12 +12,13 @@
         <form class="display-inline" method="POST" action="{{url_for('post_label')}}">
             <input type="hidden" name="label" value="{{button}}" />
             <input type="hidden" name="id" value="{{example.id}}" />
-            <input type="hidden" name="start_time" value={{timestamp}}/>
+            <input type="hidden" name="view_time" value="{{view_time}}" />
             <input type="submit" class='btn btn-sm btn-primary' value="{{button}}">
         </form>
         {% endfor %}
         <form class="display-inline" method="POST" action="{{url_for('post_label')}}">
             <input type="hidden" name="id" value="{{example.id}}" />
+            <input type="hidden" name="view_time" value="{{view_time}}" />
             <input type="text" name="label" placeholder="..." value="" />
             <input type="submit" class='btn btn-sm btn-secondary' value="Other">
         </form>
@@ -31,6 +32,6 @@
         </form>
         {% endfor %}
     </div>
-    <div class="card-footer small"><code>{{example.id}}</code> from line {{example.source_line}} of <code>{{example.source_file}}</code></div>
+    <div class="card-footer small"><code>{{example.id}}</code> from line {{example.source_line}} of <code>{{example.source_file}}</code>; served at {{view_time}}</div>
 </div>
 {%endblock%}
