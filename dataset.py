@@ -61,7 +61,7 @@ def load_jsonl_examples(path: str) -> Dict[str, Example]:
 
 
 def load_examples() -> Dict[str, Example]:
-    return load_csv_examples('trial_human_selected.csv')
+    return load_csv_examples('human_trials_final_ds.csv')
 
 if __name__ == '__main__':
     examples = load_examples()

@@ -120,11 +120,13 @@ def post_label():
     db.commit()
     db.close()
     next_id = random.choice(list(DATASET.keys()))
-    while next_id in seen_ids and len(seen_ids) < 50:
+    while next_id in seen_ids:
         next_id = random.choice(list(DATASET.keys()))
+        if len(seen_ids) == 48:
+            break
     seen_ids.append(next_id)
     print(seen_ids)
-    if len(seen_ids) == 4:
+    if len(seen_ids) == 49:
         return redirect(url_for("stats"))
     return redirect(url_for("label", id=next_id))
 
